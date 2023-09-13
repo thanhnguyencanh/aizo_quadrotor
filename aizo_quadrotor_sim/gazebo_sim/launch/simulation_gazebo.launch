@@ -1,0 +1,49 @@
+<launch>
+  <arg name="world" default="small_house" />
+  <env name="GAZEBO_MODEL_PATH" value="$(find aizo_simulator_description)/models/$(arg world)/models:$(optenv GAZEBO_MODEL_PATH)" />
+  <arg name="gazebo_gui" default="true"/>
+  <arg name="uav_name" default="quadrotor" />
+  <arg name="uav_type" default="hummingbird_rgbd" />
+
+  <arg name="x" default="0.0" />
+  <arg name="y" default="0.0" />
+  <arg name="z" default="0.1" />
+  <arg name="yaw" default="-0.785" />
+  
+  <arg name="odom" default="ground_truth/odom"/> 
+  <arg name="world_frame" default="map" />
+  <arg name="robot_frame" default="$(arg uav_name)/base_link" />
+
+  <!-- Gazebo -->
+  <include file="$(find aizo_quadrotor_launch)/launch/gazebo.launch" >
+    <arg name="world" value="$(arg world)"/>
+    <arg name="gui" value="$(arg gazebo_gui)" />
+  </include>
+
+  <group ns="$(arg uav_name)">
+    <node pkg="aizo_quadrotor_utils" type="change_header" name="change_header" output="screen">
+      <remap from="~odom_in" to="$(arg odom)" />
+      <remap from="~odom_out" to="raw_odom"/>
+      <param name="robot_frame" value="$(arg robot_frame)"/>
+      <param name="world_frame" value="$(arg world_frame)"/>
+    </node>
+
+    <node pkg="aizo_quadrotor_utils" type="change_odom" name="chang_odom">
+      <remap from="~odom_in" to="raw_odom"/>
+      <remap from="~odom_out" to="odom"/>
+      <param name="dt_thr" value="0.5"/>
+    </node>
+  </group>
+
+  <!-- Spawn robot -->
+  <include file="$(find aizo_quadrotor_launch)/launch/spawn_robot.launch" >
+    <arg name="uav_name" value="$(arg uav_name)" />
+    <arg name="uav_type" value="$(arg uav_type)" />
+
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>
+    <arg name="Y" value="$(arg yaw)"/>
+  </include> 
+
+</launch>

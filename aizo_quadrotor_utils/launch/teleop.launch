@@ -1,0 +1,10 @@
+<launch>
+  <arg name="type" default="teleop" />
+  
+  <node pkg="aizo_quadrotor_utils"
+    name="$(arg type)"
+    type="$(arg type).py"
+    output="screen">
+    <remap from="~cmd_vel" to="/quadrotor/cmd_vel"/>
+  </node>
+</launch>

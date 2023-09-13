@@ -1,0 +1,33 @@
+<launch>
+  <arg name="uav_name" default="quadrotor" />
+  <!-- <arg name="uav_package" default="pelican" /> -->
+  <arg name="uav_type" default="hummingbird_rgbd" />
+  <arg name="x" default="0.0" />
+  <arg name="y" default="0.0" />
+  <arg name="z" default="0.1" />
+  <arg name="Y" default="-0.785" />
+
+  <arg name="use_frame_prefix" default="false" />
+  <arg name="frame_prefix" default="" unless="$(arg use_frame_prefix)"/>
+  <arg name="frame_prefix" default="$(arg uav_name)/" if="$(arg use_frame_prefix)"/>
+
+  <group ns="$(arg uav_name)">
+    <arg name="model" default="$(find aizo_simulator_description)/urdf/$(arg uav_type)/$(arg uav_type).gazebo.xacro"/>
+    <param name="robot_description" command="xacro '$(arg model)' frame_prefix:=$(arg frame_prefix) "/>
+    <node name="spawn_robot"
+      pkg="gazebo_ros"
+      type="spawn_model"
+      respawn="false"
+      args="-param robot_description
+      -urdf
+      -x $(arg x)
+      -y $(arg y)
+      -z $(arg z)
+      -Y $(arg Y)
+      -model $(arg uav_name)"
+      output="screen"/>
+    
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+  </group>
+
+</launch>

@@ -1,0 +1,47 @@
+<launch>
+   <!-- robot name -->
+  <arg name="uav_name" default="quadrotor" />  
+  <!-- robot odometry topic name -->
+  <arg name="odom" default="odom"/>
+  <arg name= "mass" default="0.5"/>
+  
+  <arg name="use_rgbd" default="true"/>
+  <arg name="depth_cam" default="camera"/>
+
+  <arg name="image_raw" default="depth/image_rect_raw"/>
+  <arg name="image_info" default="depth/camera_info"/>
+  <arg name="points" default="points"/>
+
+  <!-- Controller -->
+  <include file="$(find aizo_quadrotor_launch)/launch/controller.launch">
+    <arg name="mass" value="$(arg mass)" />
+    <arg name="odom_topic" value="$(arg odom)" />
+  </include>
+
+  <group ns="$(arg uav_name)" >
+    <node pkg="kr_trackers" type="twist_to_velocity_goal.py" name="twist_to_velocity"/>
+
+    <node pkg="kr_trackers" type="waypoints_to_action.py" name="waypoints_to_action" output="screen"/>
+  </group>
+
+  <!-- Use RGBD -->
+	<group if="$(arg use_rgbd)">
+     	<!-- RGBD Covert Depth Image to Point Cloud -->
+      <group ns="$(arg uav_name)/$(arg depth_cam)">
+        <!-- Nodelet manager for this pipeline -->
+	    <node pkg="nodelet" type="nodelet" args="manager" name="nodelet_manager" output="screen"/>
+
+        <node pkg="nodelet" name="metric_rect" type="nodelet" args="load depth_image_proc/convert_metric nodelet_manager --no-bond" output="screen">
+            <remap from="image_raw" to="$(arg image_raw)"/>
+            <remap from="image" to="image_rect"/>
+        </node>
+
+        <!-- Convert it into a point cloud -->
+        <node pkg="nodelet" type="nodelet" name="cloudify" args="load depth_image_proc/point_cloud_xyz nodelet_manager --no-bond" output="screen">
+            <remap from="camera_info" to="$(arg image_info)"/>
+            <!-- <remap from="image_rect" to="$(arg image_raw)"/> -->
+            <remap from="points" to="$(arg points)"/>
+        </node>
+      </group>
+	</group>
+</launch>
