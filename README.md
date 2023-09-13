@@ -1,8 +1,8 @@
 AIZO Quadrotor Simulator
 
 =============
-Package of Gazebo quadrotor simulator. Latest version works for Gazebo > 7.0.
-User can easily set up the simulation environments and the quadrotor platform using sensors provided in this package.
+Package of Gazebo quadrotor simulator. The latest version works for Gazebo > 7.0.
+Users can easily set up the simulation environments and the quadrotor platform using the sensors provided in this package.
 
 Stacks include:
   - `aizo_models`: all the CAD models
@@ -10,7 +10,7 @@ Stacks include:
   - `aizo_quadrotor_launch`: example launch files
   - `mrsl_quadrotor_simulator`: quadrotor dynamics simulator
   - `aizo_quadrotor_utils`: ros utils
-  - `aizo_mobile_object`: gazebo mobile obtacle plugin
+  - `aizo_mobile_object`: gazebo mobile obstacle plugin
   - `aizo_quadrotor_sim`: gazebo sim
 Check each package for more details.
 
