@@ -27,11 +27,14 @@ Requirements
   Robot Frame          |  Sensor | World | Platform Examples
   :------------------- |:-----   | :-----| :-------
   Hummingbird          |  empty  | empty | hummingbird
-                       |  hokuyo | levine| hummingbird\_laser
-                       |  realsense | levine| hummingbird\_rgbd
+  |                    |  hokuyo | levine| hummingbird\_laser
+  |                    |  realsense | levine| hummingbird\_rgbd
 
 ### Test Example
 Using the example launch file in the repo
 ```
-roslaunch gazebo_sim main_sim.launch world:=office
+roslaunch gazebo_sim main_sim.launch world_model:=office
+
+```
+* then try Motors ON -> Take Off -> Go To (set z > 0)
   
