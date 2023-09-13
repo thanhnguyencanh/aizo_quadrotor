@@ -1,5 +1,5 @@
 AIZO Quadrotor Simulator
-
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
 =============
 Package of Gazebo quadrotor simulator. The latest version works for Gazebo > 7.0.
 Users can easily set up the simulation environments and the quadrotor platform using the sensors provided in this package.
