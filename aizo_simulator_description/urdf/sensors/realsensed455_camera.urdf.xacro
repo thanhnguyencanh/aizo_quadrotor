@@ -30,7 +30,7 @@ aluminum peripherial evaluation case.
     <xacro:property name="d455_cam_width" value="0.124"/>
     <xacro:property name="d455_cam_height" value="0.029"/>
     <xacro:property name="d455_cam_depth" value="0.026"/>
-    <xacro:property name="d455_cam_mount_from_center_offset" value="0.0158"/>
+    <xacro:property name="d455_cam_mount_from_center_offset" value="0.02"/>
     <!-- glass cover is 0.1 mm inwards from front aluminium plate -->
     <xacro:property name="d455_glass_to_front" value="0.1e-3"/>
     <!-- see datasheet Revision 009, Fig. 4-4 page 68 -->

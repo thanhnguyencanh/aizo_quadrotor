@@ -90,4 +90,3 @@
 
   <xacro:quadrotor_base_macro frame_prefix="$(arg frame_prefix)"/>
 </robot>
-

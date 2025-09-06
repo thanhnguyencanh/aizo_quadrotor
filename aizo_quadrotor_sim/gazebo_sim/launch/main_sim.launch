@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-    <!-- robot name -->
+  <!-- robot name -->
   <arg name="uav_name" default="quadrotor" />  
   <arg name="uav_type" default="falcon4_os1_16_256"/>
   <!-- robot base-link name -->
@@ -8,9 +8,9 @@
   <!-- lidar's frame name in the tf tree -->
   <arg name="lidar_frame" default="lidar"/>
   <!-- mass of the robot -->
-  <arg name="mass" default="1.0" /> 
+  <arg name="mass" default="1.83" /> 
   <!-- point cloud topic name -->
-  <!-- <arg name="lidar_cloud_topic" default="/falcon4/os1_cloud_node/points" /> -->
+  <arg name="lidar_cloud_topic" default="/falcon4/os1_cloud_node/points" />
   <!-- robot odometry topic name -->
   <arg name="gt_odom" default="ground_truth/odom"/> 
   <arg name="odom_topic" default="/quadrotor/odom"/>
@@ -36,7 +36,8 @@
   <arg name="z" default="1.0"/>
   <arg name="yaw" default="-0.0"/>
   <!-- control gains config file -->
-  <arg name="gains_file" default="$(find aizo_quadrotor_launch)/config/gains_hummingbird.yaml"/>
+  <!-- <arg name="gains_file" default="$(find aizo_quadrotor_launch)/config/gains_hummingbird.yaml"/> -->
+  <arg name="gains_file" default="$(find gazebo_utils)/config/falcon4_os1_so3_gains.yaml"/>
   <!-- several example world, check out aizo_quadrotor/aizo_simulator_description/worlds for all examples --> 
   <!-- example 1: testbed large scale lv1 -->   
   <arg name="world_model" default="testbed_large_lv1" />
@@ -91,7 +92,7 @@
     <arg name="mass" value="$(arg mass)" />
   </include> -->
 
-  <!-- <include file="$(find kr_mav_launch)/launch/mesh_vis.launch">
+  <include file="$(find kr_mav_launch)/launch/mesh_vis.launch">
     <arg name="mav_name" value="$(arg uav_name)"/>
     <arg name="mav_type" value="$(arg uav_type)"/>
     <arg name="odom_topic" value="$(arg odom_topic)"/>
@@ -99,23 +100,25 @@
     <arg name="color/g" value="$(arg color/g)"/>
     <arg name="color/b" value="$(arg color/b)"/>
     <arg name="color/a" value="$(arg color/a)"/>
-  </include> -->
+  </include>
+
+  <include file="$(find gazebo_sim)/launch/gui_rviz.launch">
+    <arg name="uav_name" value="$(arg uav_name)" />
+  </include> 
 
   <include file="$(find state_machine_launch)/launch/system_mp.launch">
     <arg name="onboard_sensing" value="$(arg onboard_sensing)" />
     <arg name="robot" value="$(arg uav_name)" />
+    <!-- <arg name="lidar_frame" value="$(arg lidar_frame)"/>
+    <arg name="lidar_cloud_topic" value="$(arg lidar_cloud_topic)" /> -->
     <arg name="mass" value="$(arg mass)" />
     <arg name="min_dispersion_planner" value="$(arg min_dispersion_planner)" />
     <arg name="takeoff_height" value="$(arg takeoff_height)" />
     <arg name="gains_file" value="$(arg gains_file)"/>
   </include>
 
-  <include file="$(find gazebo_sim)/launch/gui_rviz.launch">
-    <arg name="uav_name" value="$(arg uav_name)" />
-  </include>
-
-  <!-- <node name= "depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan">
+  <node name= "depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan">
     <remap from="image" to="/quadrotor/camera/depth/image_rect_raw" />
     <remap from="camera_info" to="/quadrotor/camera/depth/camera_info"/>
-  </node> -->
+  </node>
 </launch>
