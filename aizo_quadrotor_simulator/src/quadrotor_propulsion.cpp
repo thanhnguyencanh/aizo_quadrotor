@@ -3,22 +3,22 @@
 #include <gazebo/common/common.hh>
 #include <gazebo/gazebo.hh>
 
-#include <mrsl_quadrotor_simulator/Quadrotor.h>
-#include <mrsl_quadrotor_simulator/QuadrotorTRPYControl.h>
+#include <aizo_quadrotor_simulator/Quadrotor.h>
+#include <aizo_quadrotor_simulator/QuadrotorSO3AttitudeControl.h>
 
 #include <ros/callback_queue.h>
 #include <ros/ros.h>
 
 #include <stdio.h>
 
-namespace mrsl_quadrotor_simulator {
-class QuadrotorPropulsionTRPY : public gazebo::ModelPlugin {
+namespace aizo_quadrotor_simulator {
+class QuadrotorPropulsion : public gazebo::ModelPlugin {
 public:
 
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-  QuadrotorPropulsionTRPY() : initialized_(false) { robot_name_ = std::string(""); }
+  QuadrotorPropulsion() : initialized_(false) { robot_name_ = std::string(""); }
 
-  ~QuadrotorPropulsionTRPY() {
+  ~QuadrotorPropulsion() {
     node_handle_->shutdown();
     delete node_handle_;
   }
@@ -71,9 +71,9 @@ public:
 
       ros::SubscribeOptions ops;
       ops.callback_queue = &callback_queue_;
-      ops.init<QuadrotorTRPYControl::TRPYCmdMsg>(
+      ops.init<QuadrotorSO3AttitudeControl::CmdMsg>(
           command_topic_, 10,
-          boost::bind(&QuadrotorTRPYControl::cmdCallback,
+          boost::bind(&QuadrotorSO3AttitudeControl::cmdCallback,
                       &quad_attitude_control, _1));
       command_sub_ = node_handle_->subscribe(ops);
     } else
@@ -81,7 +81,7 @@ public:
                 "'so3_cmd' or 'trpy_cmd'");
 
     updateConnection = gazebo::event::Events::ConnectWorldUpdateBegin(
-        boost::bind(&QuadrotorPropulsionTRPY::OnUpdate, this, _1));
+        boost::bind(&QuadrotorPropulsion::OnUpdate, this, _1));
   }
 
   void OnUpdate(const gazebo::common::UpdateInfo &_info) {
@@ -136,9 +136,9 @@ private:
   ros::CallbackQueue callback_queue_;
 
   Quadrotor quad;
-  QuadrotorTRPYControl quad_attitude_control;
+  QuadrotorSO3AttitudeControl quad_attitude_control;
 };
 
 // Register this plugin with the simulator
-GZ_REGISTER_MODEL_PLUGIN(QuadrotorPropulsionTRPY)
+GZ_REGISTER_MODEL_PLUGIN(QuadrotorPropulsion)
 }

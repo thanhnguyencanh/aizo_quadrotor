@@ -5,7 +5,7 @@
 #include <Eigen/Geometry>
 #include <Eigen/Core>
 
-namespace mrsl_quadrotor_simulator
+namespace aizo_quadrotor_simulator
 {
   class Quadrotor
   {

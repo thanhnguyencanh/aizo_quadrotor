@@ -1,6 +1,6 @@
-#include <mrsl_quadrotor_simulator/QuadrotorSO3AttitudeControl.h>
+#include <aizo_quadrotor_simulator/QuadrotorSO3AttitudeControl.h>
 
-namespace mrsl_quadrotor_simulator {
+namespace aizo_quadrotor_simulator {
 void QuadrotorSO3AttitudeControl::init(const Quadrotor &quad, float I[][3]) {
   kf_ = quad.getPropellerThrustCoefficient();
   km_ = quad.getPropellerMomentCoefficient();

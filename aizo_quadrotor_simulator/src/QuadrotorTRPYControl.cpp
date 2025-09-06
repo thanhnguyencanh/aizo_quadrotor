@@ -1,6 +1,6 @@
-#include <mrsl_quadrotor_simulator/QuadrotorTRPYControl.h>
+#include <aizo_quadrotor_simulator/QuadrotorTRPYControl.h>
 
-namespace mrsl_quadrotor_simulator {
+namespace aizo_quadrotor_simulator {
 void QuadrotorTRPYControl::init(const Quadrotor &quad, float I[][3]) {
   kf_ = quad.getPropellerThrustCoefficient();
   km_ = quad.getPropellerMomentCoefficient();

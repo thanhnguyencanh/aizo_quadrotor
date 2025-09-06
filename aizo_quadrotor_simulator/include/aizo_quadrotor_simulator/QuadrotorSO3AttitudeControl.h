@@ -2,10 +2,10 @@
 #define QUADROTOR_ATTITUDE_CONTROL_H_
 
 #include <boost/optional.hpp>
-#include <mrsl_quadrotor_simulator/Quadrotor.h>
+#include <aizo_quadrotor_simulator/Quadrotor.h>
 #include <kr_mav_msgs/SO3Command.h>
 
-namespace mrsl_quadrotor_simulator {
+namespace aizo_quadrotor_simulator {
 class QuadrotorSO3AttitudeControl {
 public:
   typedef kr_mav_msgs::SO3Command CmdMsg;

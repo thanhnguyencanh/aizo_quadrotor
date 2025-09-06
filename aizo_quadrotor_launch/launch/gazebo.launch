@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world" default="levine" />
+  <arg name="world" default="testbed_large_lv2" />
   <env name="GAZEBO_MODEL_PATH" value="$(find aizo_simulator_description)/models/$(arg world)/models:$(optenv GAZEBO_MODEL_PATH)" />
   
   <arg name="gui" default="true" />

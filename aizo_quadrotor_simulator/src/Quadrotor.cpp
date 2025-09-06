@@ -1,7 +1,7 @@
-#include <mrsl_quadrotor_simulator/Quadrotor.h>
+#include <aizo_quadrotor_simulator/Quadrotor.h>
 #include <ros/ros.h>
 
-namespace mrsl_quadrotor_simulator {
+namespace aizo_quadrotor_simulator {
 Quadrotor::Quadrotor(void) {
   double Ixx = 2.64e-3, Iyy = 2.64e-3, Izz = 4.96e-3;
   prop_radius_ = 0.099;

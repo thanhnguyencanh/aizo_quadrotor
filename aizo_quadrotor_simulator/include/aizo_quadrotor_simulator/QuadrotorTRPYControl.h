@@ -2,10 +2,10 @@
 #define QUADROTOR_TRPY_CONTROL_H_
 
 #include <boost/optional.hpp>
-#include <mrsl_quadrotor_simulator/Quadrotor.h>
+#include <aizo_quadrotor_simulator/Quadrotor.h>
 #include <kr_mav_msgs/TRPYCommand.h>
 
-namespace mrsl_quadrotor_simulator {
+namespace aizo_quadrotor_simulator {
 class QuadrotorTRPYControl {
 public:
   typedef kr_mav_msgs::TRPYCommand TRPYCmdMsg;
