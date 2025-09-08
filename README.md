@@ -9,7 +9,7 @@ Stacks include:
   - `aizo_models`: all the CAD models
   - `aizo_quadrotor_description`: all the `urdf` and world config files
   - `aizo_quadrotor_launch`: example launch files
-  - `mrsl_quadrotor_simulator`: quadrotor dynamics simulator
+  - `aizo_quadrotor_simulator`: quadrotor dynamics simulator
   - `aizo_quadrotor_utils`: ros utils
   - `aizo_mobile_object`: gazebo mobile obstacle plugin
   - `aizo_quadrotor_sim`: gazebo sim
