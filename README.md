@@ -60,7 +60,7 @@ vcs import < external-repos.yaml
 vcs pull
 cd ../..
 
-### 3. build
+### 3. Build
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=release
 catkin build
 
