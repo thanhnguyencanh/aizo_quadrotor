@@ -54,15 +54,21 @@ cd ~/catkin_ws/src
 git clone https://github.com/thanhnguyencanh/aizo_quadrotor
 ```
 
-### 2. Clone some dependence repo
+### 2. Clone some dependence repos
+
+```
 cd ~/catkin_ws/src/aizo_quadrotor
 vcs import < external-repos.yaml
 vcs pull
 cd ../..
+```
 
 ### 3. Build
+
+```
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=release
 catkin build
+```
 
 ## Test Example
 Using the example launch file in the repo
