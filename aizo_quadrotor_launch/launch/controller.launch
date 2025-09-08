@@ -1,59 +1,64 @@
 <launch>
   <arg name="uav_name" default="quadrotor" />
   <arg name="uav_type" default="hummingbird" />
-  <arg name="mass" default="0.5" />
+  <arg name="mass" default="1.8" />
+  <arg name="simulation" default="true"/>
+  <arg name="max_prop_force" default="7"/>
+	<arg name="gains_file" default="$(find control_launch)/config/so3_control_gains.yaml"/>
 
   <arg name="odom_topic" default="ground_truth/odom" />
 
   <arg name="start_nodelet_manager" default="true" />
-  <arg name="nodelet_manager_name" default="nodelet_manager_control" />
+  <arg name="manager" default="$(arg uav_name)_manager_control"/>
 
-  <group ns="$(arg uav_name)" >
+
+  <group ns="$(arg uav_name)">
     <param name="mass" value="$(arg mass)" />
 
     <!-- Control UAV -->
-    <node pkg="nodelet"
-      type="nodelet"
-      name="$(arg nodelet_manager_name)"
-      args="manager"
-      output="screen"
-      if="$(arg start_nodelet_manager)" />
-    
-    <node pkg="nodelet" 
-      type="nodelet"
-      name="trackers_manager"
-      args="load kr_trackers_manager/TrackersManager $(arg nodelet_manager_name)"
-      output="screen">
+    <node pkg="nodelet" type="nodelet" name="$(arg manager)" args="manager" output="screen" if="$(arg start_nodelet_manager)" />
 
-      <rosparam file="$(find kr_mav_launch)/config/trackers.yaml" />
-      <rosparam file="$(find kr_mav_launch)/config/tracker_params.yaml" />
-      <remap from="~odom" to="$(arg odom_topic)" />
-      <remap from="~cmd" to="position_cmd" />
-      <remap from="~des_max" to="des_max"/>
-			<param name="mass" value="(arg mass)"/>
-    </node>
+    <!-- If simulation -->
+		<group if="$(arg simulation)">
+			<node pkg="nodelet" type="nodelet" name="trackers_manager" args="load kr_trackers_manager/TrackersManager $(arg manager)" output="screen">
+				<rosparam file="$(find control_launch)/config/trackers_mp.yaml"/>
+				<rosparam file="$(find control_launch)/config/tracker_params_mp.yaml"/>
+				<remap from="~odom" to="odom"/>
+				<remap from="~cmd" to="position_cmd"/>
+				<remap from="~des_max" to="des_max"/>
+				<param name="mass" value="(arg mass)"/>
+			</node>
+			<node pkg="nodelet" type="nodelet" args="load kr_mav_controllers/SO3ControlNodelet $(arg manager)" name="so3_control" required="true" output="screen">
+				<rosparam file="$(arg gains_file)"/>
+				<param name="mass" value="$(arg mass)"/>
+				<remap from="~odom" to="odom"/>
+				<remap from="~position_cmd" to="position_cmd"/>
+				<remap from="~so3_cmd" to="so3_cmd"/>
+				<remap from="~motors" to="motors"/>
+			</node>
+		</group>
 
-    <node pkg="nodelet"
-      type="nodelet"
-      args="load kr_mav_controllers/SO3ControlNodelet $(arg nodelet_manager_name)"
-      name="so3_control"
-      required="true"
-      output="screen">
-      <rosparam file="$(find aizo_quadrotor_launch)/config/gains_$(arg uav_type).yaml"/>
-      <param name="mass" value="$(arg mass)"/>
-      <remap from="~odom" to="$(arg odom_topic)"/>
-      <remap from="~position_cmd" to="position_cmd"/>
-      <remap from="~so3_cmd" to="so3_cmd"/>
-      <remap from="~motors" to="motors"/>
-    </node>
+		<!-- If real experiment, use a different set of tracker and controller parameters -->
+		<group unless="$(arg simulation)">
+			<node pkg="nodelet" type="nodelet" name="trackers_manager" args="load kr_trackers_manager/TrackersManager $(arg manager)" output="screen">
+				<rosparam file="$(find real_experiment_launch)/config/trackers.yaml"/>
+				<rosparam file="$(find real_experiment_launch)/config/tracker_params.yaml"/>
+				<remap from="~odom" to="odom"/>
+				<remap from="~cmd" to="position_cmd"/>
+				<remap from="~des_max" to="des_max"/>
+				<param name="mass" value="(arg mass)"/>
+			</node>
+			<node pkg="nodelet" type="nodelet" args="load kr_mav_controllers/SO3ControlNodelet $(arg manager)" name="so3_control" required="true" output="screen">
+				<rosparam file="$(find real_experiment_launch)/config/so3_control_gains.yaml"/>
+				<param name="mass" value="$(arg mass)"/>
+				<remap from="~odom" to="odom"/>
+				<remap from="~position_cmd" to="position_cmd"/>
+				<remap from="~so3_cmd" to="so3_cmd"/>
+				<remap from="~motors" to="motors"/>
+			</node>
+		</group>
 
-    <!-- MAV Manager -->
-    <node pkg="kr_mav_manager"
-      type="mav_services"
-      name="mav_services"
-      output="screen">
-      <rosparam file="$(find kr_mav_launch)/config/mav_manager_params.yaml"/>
-      <remap from="odom" to="$(arg odom_topic)"/>
-    </node>
+
+		<node pkg="kr_trackers" type="twist_to_velocity_goal.py" name="twist_to_velocity"/>
   </group>
 </launch>

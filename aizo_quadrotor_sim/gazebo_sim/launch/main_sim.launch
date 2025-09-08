@@ -19,6 +19,8 @@
   <!-- if use onboard sensing, set it to be true and set odom to be ukf_odom /> -->
   <arg name="onboard_sensing" default="false"/>
 
+  <arg name="use_rgbd" default="true"/>
+
   <!-- color in robot model rviz -->
   <arg name="color/r" default="0.0"/>
   <arg name="color/g" default="0.0"/>
@@ -45,6 +47,8 @@
   <!-- <arg name="world_model" default="testbed_large_lv2" /> -->
   <!-- example 3: testbed large scale lv3-->
   <!-- <arg name="world_model" default="testbed_large_lv3" /> -->
+
+
 
   <env name="GAZEBO_MODEL_PATH" value="$(find aizo_simulator_description)/models/$(arg world_model)/models:$(optenv GAZEBO_MODEL_PATH)" />
 
@@ -87,10 +91,10 @@
     <node pkg="tf2_ros" type="static_transform_publisher" name="tf_world" args="0 0 0 0 0 0 $(arg robot_base_link) base_link"/>
   </group>
 
-  <!-- <include file="$(find gazebo_sim)/launch/robot_bringup.launch">
+  <include file="$(find gazebo_sim)/launch/robot_bringup.launch">
     <arg name="uav_name" value="$(arg uav_name)" />
     <arg name="mass" value="$(arg mass)" />
-  </include> -->
+  </include>
 
   <include file="$(find kr_mav_launch)/launch/mesh_vis.launch">
     <arg name="mav_name" value="$(arg uav_name)"/>
@@ -106,16 +110,21 @@
     <arg name="uav_name" value="$(arg uav_name)" />
   </include> 
 
-  <include file="$(find state_machine_launch)/launch/system_mp.launch">
+  <!-- <include file="$(find state_machine_launch)/launch/system_mp.launch">
     <arg name="onboard_sensing" value="$(arg onboard_sensing)" />
     <arg name="robot" value="$(arg uav_name)" />
-    <!-- <arg name="lidar_frame" value="$(arg lidar_frame)"/>
-    <arg name="lidar_cloud_topic" value="$(arg lidar_cloud_topic)" /> -->
+    <arg name="use_rgbd" value="$(arg use_rgbd)"/>
     <arg name="mass" value="$(arg mass)" />
     <arg name="min_dispersion_planner" value="$(arg min_dispersion_planner)" />
     <arg name="takeoff_height" value="$(arg takeoff_height)" />
     <arg name="gains_file" value="$(arg gains_file)"/>
-  </include>
+  </include> -->
+
+  <!-- State machine -->
+	<include file="$(find state_machine_launch)/launch/state_machine_mp.launch">
+		<arg name="takeoff_height" value="$(arg takeoff_height)"/>
+	</include>
+
 
   <node name= "depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan">
     <remap from="image" to="/quadrotor/camera/depth/image_rect_raw" />
