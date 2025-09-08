@@ -55,14 +55,16 @@ git clone https://github.com/thanhnguyencanh/aizo_quadrotor
 ```
 
 ### 2. Clone some dependence repo
-
+cd ~/catkin_ws/src/aizo_quadrotor
+vcs import < external-repos.yaml
+vcs pull
+cd ../..
 
 ### 3. build
-cd ..
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=release
 catkin build
 
-### Test Example
+## Test Example
 Using the example launch file in the repo
 ```
 roslaunch gazebo_sim main_sim.launch world_model:=testbed_large_lv1
