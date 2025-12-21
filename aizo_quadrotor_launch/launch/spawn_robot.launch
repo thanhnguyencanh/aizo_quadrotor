@@ -14,20 +14,20 @@
   <group ns="$(arg uav_name)">
     <arg name="model" default="$(find aizo_simulator_description)/urdf/$(arg uav_type)/$(arg uav_type).gazebo.xacro"/>
     <param name="robot_description" command="xacro '$(arg model)' frame_prefix:=$(arg frame_prefix) "/>
-    <node name="spawn_robot"
-      pkg="gazebo_ros"
-      type="spawn_model"
-      respawn="false"
-      args="-param robot_description
+    <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model" respawn="false" args="-param robot_description
       -urdf
       -x $(arg x)
       -y $(arg y)
       -z $(arg z)
       -Y $(arg Y)
-      -model $(arg uav_name)"
-      output="screen"/>
-    
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+      -model $(arg uav_name)" output="screen"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
   </group>
 
+  <!--
+  <include file="$(find aizo_quadrotor_launch)/launch/controller.launch">
+    <arg name="mav_name" value="$(arg mav_name)"/>
+  </include>
+-->
 </launch>

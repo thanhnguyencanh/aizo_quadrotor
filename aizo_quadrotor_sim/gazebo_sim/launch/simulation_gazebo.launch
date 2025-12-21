@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <launch>
   <arg name="world" default="small_house" />
   <env name="GAZEBO_MODEL_PATH" value="$(find aizo_simulator_description)/models/$(arg world)/models:$(optenv GAZEBO_MODEL_PATH)" />
   <arg name="gazebo_gui" default="true"/>
   <arg name="uav_name" default="quadrotor" />
-  <arg name="uav_type" default="hummingbird_rgbd" />
+  <arg name="uav_type" default="falcon4_os1_16_256" />
 
   <arg name="x" default="0.0" />
   <arg name="y" default="0.0" />
