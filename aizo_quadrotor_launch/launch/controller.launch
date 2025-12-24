@@ -1,24 +1,24 @@
 <launch>
-  <arg name="uav_name" default="quadrotor" />
-  <arg name="uav_type" default="hummingbird" />
-  <arg name="mass" default="1.8" />
-  <arg name="simulation" default="true"/>
-  <arg name="max_prop_force" default="7"/>
-  <arg name="gains_file" default="$(find aizo_quadrotor_launch)/config/so3_control_gains.yaml"/>
+	<arg name="uav_name" default="quadrotor" />
+	<arg name="uav_type" default="hummingbird" />
+	<arg name="mass" default="1.8" />
+	<arg name="simulation" default="true"/>
+	<arg name="max_prop_force" default="7"/>
+	<arg name="gains_file" default="$(find aizo_quadrotor_launch)/config/so3_control_gains.yaml"/>
 
-  <arg name="odom_topic" default="ground_truth/odom" />
+	<arg name="odom_topic" default="ground_truth/odom" />
 
-  <arg name="start_nodelet_manager" default="true" />
-  <arg name="manager" default="$(arg uav_name)_manager_control"/>
+	<arg name="start_nodelet_manager" default="true" />
+	<arg name="manager" default="$(arg uav_name)_manager_control"/>
 
 
-  <group ns="$(arg uav_name)">
-    <param name="mass" value="$(arg mass)" />
+	<group ns="$(arg uav_name)">
+		<param name="mass" value="$(arg mass)" />
 
-    <!-- Control UAV -->
-    <node pkg="nodelet" type="nodelet" name="$(arg manager)" args="manager" output="screen" if="$(arg start_nodelet_manager)" />
+		<!-- Control UAV -->
+		<node pkg="nodelet" type="nodelet" name="$(arg manager)" args="manager" output="screen" if="$(arg start_nodelet_manager)" />
 
-    <!-- If simulation -->
+		<!-- If simulation -->
 		<group if="$(arg simulation)">
 			<node pkg="nodelet" type="nodelet" name="trackers_manager" args="load aizo_trackers_manager/TrackersManager $(arg manager)" output="screen">
 				<rosparam file="$(find aizo_quadrotor_launch)/config/trackers.yaml"/>
@@ -60,5 +60,10 @@
 
 
 		<node pkg="aizo_trackers" type="twist_to_velocity_goal.py" name="twist_to_velocity"/>
-  </group>
+
+		<node pkg="aizo_quadrotor_manager" type="mav_services" name="mav_services" output="screen">
+			<rosparam file="$(find aizo_quadrotor_launch)/config/quadrotor_manager_params.yaml"/>
+			<remap from="odom" to="$(arg odom_topic)"/>
+		</node>
+	</group>
 </launch>

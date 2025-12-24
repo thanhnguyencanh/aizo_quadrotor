@@ -10,6 +10,11 @@ from rqt_gui_py.plugin import Plugin
 
 import aizo_quadrotor_manager.srv
 import std_srvs.srv
+from nav_msgs.msg import Odometry
+import aizo_planning_msgs.msg as QM
+import numpy as np
+from tf.transformations import euler_from_quaternion
+
 
 class MavManagerUi(Plugin):
 
@@ -18,6 +23,9 @@ class MavManagerUi(Plugin):
     self.setObjectName('MavManagerUi')
 
     self._publisher = None
+    
+    self.odom_count = 0
+    self.command_count = 0
 
     self.robot_name = 'quadrotor'
     self.mav_node_name = 'mav_services'
@@ -45,6 +53,63 @@ class MavManagerUi(Plugin):
 
     self._widget.takeoff_push_button.pressed.connect(self._on_takeoff_pressed)
     self._widget.gohome_push_button.pressed.connect(self._on_gohome_pressed)
+    
+    self.odom_sub = rospy.Subscriber("odom", Odometry, self.odom_cb, queue_size=10)
+    self.command_sub = rospy.Subscriber(
+        "position_cmd", QM.PositionCommand, self.command_cb, queue_size=10
+    )
+  def odom_cb(self, msg):
+    if self.odom_count % 10 == 0:
+      x = np.round(msg.pose.pose.position.x, 4)
+      y = np.round(msg.pose.pose.position.y, 4)
+      z = np.round(msg.pose.pose.position.z, 4)
+
+      quaternion = (
+        msg.pose.pose.orientation.x,
+        msg.pose.pose.orientation.y,
+        msg.pose.pose.orientation.z,
+        msg.pose.pose.orientation.w,
+      )
+      euler = euler_from_quaternion(quaternion)
+      yaw = np.round(euler[2], 4)
+      self._widget.odom_x_data.setText(str(x))
+      self._widget.odom_y_data.setText(str(y))
+      self._widget.odom_z_data.setText(str(z))
+      self._widget.odom_yaw_data.setText(str(yaw))
+      self.odom_count = 0
+    self.odom_count += 1
+
+  def command_cb(self, msg):
+    if self.command_count % 10 == 0:
+      pos_x = np.round(msg.position.x, 4)
+      pos_y = np.round(msg.position.y, 4)
+      pos_z = np.round(msg.position.z, 4)
+      vel_x = np.round(msg.velocity.x, 4)
+      vel_y = np.round(msg.velocity.y, 4)
+      vel_z = np.round(msg.velocity.z, 4)
+      acc_x = np.round(msg.acceleration.x, 4)
+      acc_y = np.round(msg.acceleration.y, 4)
+      acc_z = np.round(msg.acceleration.z, 4)
+      yaw = np.round(msg.yaw, 4)
+      yaw_dot = np.round(msg.yaw_dot, 4)
+
+      self._widget.command_pos_x_data.setText(str(pos_x))
+      self._widget.command_pos_y_data.setText(str(pos_y))
+      self._widget.command_pos_z_data.setText(str(pos_z))
+      self._widget.command_vel_x_data.setText(str(vel_x))
+      self._widget.command_vel_y_data.setText(str(vel_y))
+      self._widget.command_vel_z_data.setText(str(vel_z))
+      self._widget.command_acc_x_data.setText(str(acc_x))
+      self._widget.command_acc_y_data.setText(str(acc_y))
+      self._widget.command_acc_z_data.setText(str(acc_z))
+      # self._widget.command_jerk_x_data.setText(str(jerk_x))
+      # self._widget.command_jerk_y_data.setText(str(jerk_y))
+      # self._widget.command_jerk_z_data.setText(str(jerk_z))
+      self._widget.command_yaw_data.setText(str(yaw))
+      self._widget.command_yaw_dot_data.setText(str(yaw_dot))
+
+      self.command_count = 0
+    self.command_count += 1
 
   def _on_robot_name_changed(self, robot_name):
       self.robot_name = str(robot_name)

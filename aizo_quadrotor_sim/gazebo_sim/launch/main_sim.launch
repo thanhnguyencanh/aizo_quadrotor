@@ -102,19 +102,4 @@
   <include file="$(find gazebo_sim)/launch/gui_rviz.launch">
     <arg name="uav_name" value="$(arg uav_name)" />
   </include> 
-
-  <!-- <include file="$(find state_machine_launch)/launch/system_mp.launch">
-    <arg name="onboard_sensing" value="$(arg onboard_sensing)" />
-    <arg name="robot" value="$(arg uav_name)" />
-    <arg name="use_rgbd" value="$(arg use_rgbd)"/>
-    <arg name="mass" value="$(arg mass)" />
-    <arg name="min_dispersion_planner" value="$(arg min_dispersion_planner)" />
-    <arg name="takeoff_height" value="$(arg takeoff_height)" />
-    <arg name="gains_file" value="$(arg gains_file)"/>
-  </include> -->
-
-  <!-- State machine -->
-  <!-- <include file="$(find state_machine_launch)/launch/state_machine_mp.launch">
-		<arg name="takeoff_height" value="$(arg takeoff_height)"/>
-	</include> -->
 </launch>
