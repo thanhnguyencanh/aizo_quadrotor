@@ -1,9 +1,4 @@
 repositories:
-  kr_mav_control:
-    type: git
-    url: http://github.com/KumarRobotics/kr_mav_control.git
-    version: master
-
   ouster_example:
     type: git
     url: http://github.com/XuRobotics/ouster_example.git
@@ -13,8 +8,3 @@ repositories:
     type: git
     url: https://github.com/KumarRobotics/waypoint_navigation_plugin.git
     version: master
-
-  kr_planning_msgs:
-    type: git
-    url: https://github.com/KumarRobotics/kr_planning_msgs.git
-    version: main

@@ -3,12 +3,12 @@
 
 #include <boost/optional.hpp>
 #include <aizo_quadrotor_simulator/Quadrotor.h>
-#include <kr_mav_msgs/TRPYCommand.h>
+#include <aizo_planning_msgs/TRPYCommand.h>
 
 namespace aizo_quadrotor_simulator {
 class QuadrotorTRPYControl {
 public:
-  typedef kr_mav_msgs::TRPYCommand TRPYCmdMsg;
+  typedef aizo_planning_msgs::TRPYCommand TRPYCmdMsg;
   void init(const Quadrotor &quad, float I[][3]);
   Quadrotor::MotorState getControl(const Quadrotor::State &state);
   void cmdCallback(const TRPYCmdMsg::ConstPtr &msg);

@@ -51,15 +51,15 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>gazebo_dev</build_depend>
   <build_depend>gazebo_ros</build_depend>
-  <build_depend>kr_mav_msgs</build_depend>
+  <build_depend>aizo_planning_msgs</build_depend>
   <build_depend>roscpp</build_depend>
   <build_export_depend>gazebo_dev</build_export_depend>
   <build_export_depend>gazebo_ros</build_export_depend>
-  <build_export_depend>kr_mav_msgs</build_export_depend>
+  <build_export_depend>aizo_planning_msgs</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
   <exec_depend>gazebo_dev</exec_depend>
   <exec_depend>gazebo_ros</exec_depend>
-  <exec_depend>kr_mav_msgs</exec_depend>
+  <exec_depend>aizo_planning_msgs</exec_depend>
   <exec_depend>roscpp</exec_depend>
 
 

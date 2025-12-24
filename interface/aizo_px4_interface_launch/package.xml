@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>aizo_px4_interface_launch</name>
+  <version>1.0.0</version>
+  <description>Launch files for AIZO quadrotor PX4/MAVROS interface integration</description>
+  
+  <maintainer email="quchao@seas.upenn.edu">Chao Qu</maintainer>
+  <maintainer email="chenste@seas.upenn.edu">Steven Chen</maintainer>
+
+  <license>Penn Software License</license>
+
+  <author>Chao Qu</author>
+  <author>Steven Chen</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <exec_depend>aizo_mavros_interface</exec_depend>
+  <exec_depend>mavros</exec_depend>
+  <exec_depend>mavros_msgs</exec_depend>
+
+  <export>
+  </export>
+</package>

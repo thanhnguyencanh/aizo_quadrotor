@@ -1,0 +1,26 @@
+<package format="2">
+  <name>aizo_quadrotor_controller</name>
+  <version>1.0.0</version>
+  <description>AIZO quadrotor SO3 controller - Geometric controller for quadrotors</description>
+  <maintainer email="thanhnc@todo.todo">Thanh NC</maintainer>
+
+  <license>BSD</license>
+
+  <author>Kartik Mohta</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>dynamic_reconfigure</depend>
+  <depend>geometry_msgs</depend>
+  <depend>aizo_planning_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>nodelet</depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>tf</depend>
+
+  <export>
+    <nodelet plugin="${prefix}/nodelet_plugin.xml"/>
+  </export>
+
+</package>

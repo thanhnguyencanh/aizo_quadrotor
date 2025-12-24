@@ -1,0 +1,12 @@
+trackers:
+  - aizo_trackers/LineTrackerMinJerk
+  - aizo_trackers/LineTrackerDistance
+#  - aizo_trackers/LineTrackerTrapezoid
+#  - aizo_trackers/LineTrackerYaw
+  - aizo_trackers/VelocityTracker
+  - aizo_trackers/NullTracker
+  - aizo_trackers/CircleTracker
+  - aizo_trackers/TrajectoryTracker
+  - aizo_trackers/SmoothVelTracker
+  - aizo_trackers/LissajousTracker
+  - aizo_trackers/LissajousAdder

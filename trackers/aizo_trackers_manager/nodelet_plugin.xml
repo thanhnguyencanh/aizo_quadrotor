@@ -1,0 +1,6 @@
+<library path="lib/libaizo_trackers_manager">
+  <class name="aizo_trackers_manager/TrackersManager" type="TrackersManager" base_class_type="nodelet::Nodelet">
+    <description>
+    </description>
+  </class>
+</library>

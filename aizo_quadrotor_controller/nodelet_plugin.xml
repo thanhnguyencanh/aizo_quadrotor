@@ -1,0 +1,23 @@
+<library path="lib/libaizo_so3_control">
+  <class name="aizo_quadrotor_controller/SO3ControlNodelet" type="SO3ControlNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      AIZO SO3 controller for quadrotor control
+    </description>
+  </class>
+
+  <class name="aizo_quadrotor_controller/SO3TRPYControlNodelet" type="SO3TRPYControlNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      AIZO SO3 controller with thrust, roll, pitch, yaw output
+    </description>
+  </class>
+</library>
+
+<!--
+<library path="lib/libaizo_pid_control">
+  <class name="aizo_quadrotor_controller/PIDControlNodelet" type="PIDControlNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      AIZO PID controller
+    </description>
+  </class>
+</library>
+-->

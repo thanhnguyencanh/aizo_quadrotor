@@ -43,7 +43,7 @@ sudo apt install  python3-catkin-tools python3-rosdep python3-rosinstall python3
    python3-pycryptodome python3-gnupg libsuitesparse-dev libv4l-dev libceres-dev \
    ros-noetic-random-numbers ros-noetic-mavros-msgs libsdl-dev libsdl-image1.2-dev \
    ros-noetic-gazebo-ros ros-noetic-image-geometry ros-noetic-depth-image-proc \
-   ros-noetic-tf2-geometry-msgs 
+   ros-noetic-tf2-geometry-msgs
 ```
 
 ### 1. Clone this repo

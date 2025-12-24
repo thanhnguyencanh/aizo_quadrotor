@@ -1,0 +1,20 @@
+<package format="2">
+  <name>aizo_mesh_visualization</name>
+  <version>1.0.0</version>
+  <description>AIZO mesh visualization for quadrotors - visualizes quadrotor pose as 3D mesh in RViz</description>
+
+  <maintainer email="thanhnc@todo.todo">Thanh NC</maintainer>
+
+  <license>BSD</license>
+
+  <author>Kartik Mohta</author>
+  <author>Michael Watterson</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>topic_tools</depend>
+  <depend>visualization_msgs</depend>
+
+</package>

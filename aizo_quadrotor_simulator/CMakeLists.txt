@@ -10,7 +10,7 @@ project(aizo_quadrotor_simulator)
 find_package(catkin REQUIRED COMPONENTS
   gazebo_dev
   gazebo_ros
-  kr_mav_msgs
+  aizo_planning_msgs
   roscpp
 )
 
@@ -75,7 +75,7 @@ include_directories(${EIGEN3_INCLUDE_DIRS})
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   kr_mav_msgs
+#   aizo_planning_msgs
 # )
 
 ################################################
@@ -110,7 +110,7 @@ include_directories(${EIGEN3_INCLUDE_DIRS})
 catkin_package(
   #  INCLUDE_DIRS include
   #  LIBRARIES aizo_quadrotor_simulator
-  CATKIN_DEPENDS gazebo_dev gazebo_ros kr_mav_msgs roscpp
+  CATKIN_DEPENDS gazebo_dev gazebo_ros aizo_planning_msgs roscpp
   #  DEPENDS system_lib
 )
 

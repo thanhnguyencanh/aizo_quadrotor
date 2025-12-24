@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>aizo_planning_rviz_plugins</name>
+  <version>1.0.0</version>
+  <description>
+    AIZO Planning RViz Plugins - Visualization plugins for displaying planning
+    messages in RViz, including trajectories, paths, primitives, and voxel maps.
+    Based on kr_planning_rviz_plugins from KumarRobotics.
+  </description>
+
+  <maintainer email="thanhnc@todo.todo">thanhnc</maintainer>
+
+  <license>Penn Software License</license>
+
+  <author>Sikang Liu (original kr_planning_rviz_plugins)</author>
+  <author>Laura Jarin-Lipschitz (original kr_planning_rviz_plugins)</author>
+  <author email="thanhnc@todo.todo">thanhnc</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>rviz</depend>
+  <depend>pcl_ros</depend>
+  <depend>eigen_conversions</depend>
+  <depend>tf_conversions</depend>
+  <depend>aizo_planning_msgs</depend>
+
+  <export>
+    <rviz plugin="${prefix}/plugin_description.xml"/>
+  </export>
+</package>

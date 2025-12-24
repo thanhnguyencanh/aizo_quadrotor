@@ -11,7 +11,7 @@
   <arg name="image_raw" default="depth/image_rect_raw"/>
   <arg name="image_info" default="depth/camera_info"/>
   <arg name="points" default="points"/>
-  <arg name="gains_file" default="$(find control_launch)/config/so3_control_gains.yaml"/>
+  <arg name="gains_file" default="$(find aizo_quadrotor_launch)/config/so3_control_gains.yaml"/>
   <arg name="use_motion_primitive" default="true"/>
 
   <!-- Controller -->
@@ -27,6 +27,7 @@
       <!-- Nodelet manager for this pipeline -->
       <node pkg="nodelet" type="nodelet" args="manager" name="nodelet_manager" output="screen"/>
 
+      <!-- Convert depth image to metric units -->
       <node pkg="nodelet" name="metric_rect" type="nodelet" args="load depth_image_proc/convert_metric nodelet_manager --no-bond" output="screen">
         <remap from="image_raw" to="$(arg image_raw)"/>
         <remap from="image" to="image_rect"/>
@@ -37,6 +38,11 @@
         <remap from="camera_info" to="$(arg image_info)"/>
         <!-- <remap from="image_rect" to="$(arg image_raw)"/> -->
         <remap from="points" to="$(arg points)"/>
+      </node>
+
+      <node pkg="nodelet" type="nodelet" name="depthimage_to_laserscan" args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet nodelet_manager --no-bond">
+        <remap from="image" to="/quadrotor/camera/depth/image_rect_raw" />
+        <remap from="camera_info" to="/quadrotor/camera/depth/camera_info"/>
       </node>
     </group>
   </group>

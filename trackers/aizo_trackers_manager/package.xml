@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>aizo_trackers_manager</name>
+  <version>1.0.0</version>
+  <description>AIZO Trackers Manager - manages trajectory trackers for quadrotor control (migrated from KumarRobotics kr_trackers_manager)</description>
+  <maintainer email="thanhnc@aizo.ai">Thanh Nguyen</maintainer>
+
+  <license>BSD</license>
+
+  <author>Kartik Mohta</author>
+  <author>AIZO Development Team</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>nodelet</depend>
+  <depend>pluginlib</depend>
+  <depend>aizo_planning_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>aizo_tracker_msgs</depend>
+
+  <export>
+    <nodelet plugin="${prefix}/nodelet_plugin.xml"/>
+  </export>
+</package>

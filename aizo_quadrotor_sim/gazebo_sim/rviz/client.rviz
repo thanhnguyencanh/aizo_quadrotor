@@ -81,8 +81,6 @@ Visualization Manager:
         All Enabled: false
         base_link:
           Value: true
-        cam_frame_id:
-          Value: true
         camera_accel_frame:
           Value: true
         camera_accel_optical_frame:
@@ -125,10 +123,6 @@ Visualization Manager:
           Value: true
         quadrotor/odom:
           Value: true
-        test:
-          Value: true
-        trajectory_server_iraf_slam:
-          Value: true
         world:
           Value: true
       Marker Alpha: 1
@@ -139,8 +133,6 @@ Visualization Manager:
       Show Names: true
       Tree:
         world:
-          cam_frame_id:
-            {}
           quadrotor/map:
             map:
               quadrotor/base_link:
@@ -172,10 +164,6 @@ Visualization Manager:
                   {}
             quadrotor/odom:
               {}
-          test:
-            {}
-          trajectory_server_iraf_slam:
-            {}
       Update Interval: 0
       Value: true
     - Class: rviz/Marker
@@ -209,7 +197,7 @@ Visualization Manager:
       Name: Env
     - Class: rviz/Group
       Displays:
-        - Class: kr_planning_rviz_plugins/Path
+        - Class: aizo_planning_rviz_plugins/Path
           Enabled: true
           LineColor: 204; 51; 204
           LineScale: 0.4000000059604645
@@ -220,7 +208,7 @@ Visualization Manager:
           Topic: /quadrotor/global_plan_server/path
           Unreliable: false
           Value: true
-        - Class: kr_planning_rviz_plugins/Path
+        - Class: aizo_planning_rviz_plugins/Path
           Enabled: true
           LineColor: 0; 255; 0
           LineScale: 0.800000011920929
@@ -259,7 +247,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-        - Class: kr_planning_rviz_plugins/Path
+        - Class: aizo_planning_rviz_plugins/Path
           Enabled: true
           LineColor: 78; 154; 6
           LineScale: 0.800000011920929
@@ -273,7 +261,7 @@ Visualization Manager:
         - AccColor: 10; 200; 55
           AccScale: 0.014999999664723873
           AccVis: true
-          Class: kr_planning_rviz_plugins/Trajectory
+          Class: aizo_planning_rviz_plugins/Trajectory
           Enabled: true
           JrkColor: 200; 20; 55
           JrkScale: 0.014999999664723873
@@ -295,7 +283,7 @@ Visualization Manager:
           YawTriangleAngle: 0.699999988079071
           YawTriangleScale: 0.5
           YawVis: true
-        - Class: kr_planning_rviz_plugins/Path
+        - Class: aizo_planning_rviz_plugins/Path
           Enabled: true
           LineColor: 0; 170; 255
           LineScale: 0.5
@@ -328,7 +316,7 @@ Visualization Manager:
           Axis: Z
           BoundScale: 0.5
           Channel Name: intensity
-          Class: kr_planning_rviz_plugins/VoxelMap
+          Class: aizo_planning_rviz_plugins/VoxelMap
           Color: 239; 41; 41
           Color Transformer: AxisColor
           Decay Time: 0
@@ -361,7 +349,7 @@ Visualization Manager:
           Axis: Z
           BoundScale: 3
           Channel Name: intensity
-          Class: kr_planning_rviz_plugins/VoxelMap
+          Class: aizo_planning_rviz_plugins/VoxelMap
           Color: 252; 233; 79
           Color Transformer: FlatColor
           Decay Time: 0
@@ -696,8 +684,8 @@ Visualization Manager:
         Value: true
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 3.066560983657837
-        Min Value: -0.11243883520364761
+        Max Value: 3.0563299655914307
+        Min Value: -0.1126079261302948
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -709,7 +697,7 @@ Visualization Manager:
       Decay Time: 0
       Depth Map Topic: /quadrotor/camera/depth/image_rect_raw
       Depth Map Transport Hint: raw
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
@@ -725,12 +713,12 @@ Visualization Manager:
       Topic Filter: true
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
+        Max Value: 0.0790661945939064
+        Min Value: 0.0786384716629982
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -749,7 +737,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.009999999776482582
       Style: Points
-      Topic: /scan
+      Topic: /quadrotor/camera/scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -797,7 +785,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 47.21465301513672
+      Distance: 17.784255981445312
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -805,9 +793,9 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.1566789299249649
-        Y: -0.008765984326601028
-        Z: -0.15099264681339264
+        X: 3.8327789306640625
+        Y: -1.795161485671997
+        Z: -1.4552655220031738
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
@@ -815,7 +803,7 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 0.5336486101150513
       Target Frame: ground_truth/quadrotor/quadrotor
-      Yaw: 4.449722766876221
+      Yaw: 4.444722652435303
     Saved: ~
 Window Geometry:
   Displays:
@@ -838,4 +826,4 @@ Window Geometry:
     collapsed: false
   Width: 3596
   X: 648
-  Y: 389
+  Y: 315
